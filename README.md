@@ -6,8 +6,11 @@ But it also allows to prepare such features in order to train a ML model.
 ![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/src/img1.jpeg)
 ## Organization: 
 
+### Data: 
+As an exemple, we choosed two HIV gp160 specific BnAb structures. 
+
 ### Parser: 
-It reads provided PDB file in order to fetch AA sequences as well as X,Y,Z coordinates. 
+It reads provided PDB filed in order to fetch AA sequences as well as X,Y,Z coordinates. 
 Torsion angles are computed along the sequence (phi,psi,tau,theta). 
 Since the first one is incomplete at the extremities of the protein sequence and since the last two are computed in 3/4 AA long windows,
 protein sequences are trimmed accordingly. 
@@ -33,10 +36,12 @@ We opted for a LSTM-Autoencoder architecture with convolutional layers in front 
 The class allows to train the model and show training and testing metrics. 
 With no scalability assessment, we also implemented a finetuning method. 
 
-Training on 3500 rotamers and validating on 500 other allows us to reach something like 15 MSE (Batch size = 200, epochs = 100, CPU). 
+Training on 70/30% allows us to reach something like 15 MSE (Batch size = 200, epochs = 100, CPU). 
 Fine tuning with a lower learning rate allowed us to reach 13 MSE.
-However the model does not appear to overfit (see tutorial) and interstructure variability has to be considered. 
+These metrics becomes lower in a 90/10%, probably because of structural redondance (efficient rotamers).
+The model does not appear to overfit (see tutorial) however interstructure variability has to be considered. 
 Using a GPU, one could reach a very low MSE.
+
 
 ### To go further: 
 The implementation as it is allows to predict next amino acids in a proteic sequence. 
@@ -44,4 +49,18 @@ Skilled bioinformatician could think about trying to predict the 3D structure (X
 To do so, one has to rotate and translate <b>each slice</b> of the input structure so that the first amino acid is the reference.
 (store asymetric carbons as attributes then call them at each slice to use the transform function of PDB)
 After having trained the model and having made your query predictions, one can create a new pdb file and inspect the structure 
-using the Pymol software for exemple. 
+using the Pymol software.
+
+## Few results 
+
+### Training 
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/training.png)
+### Fine tuning 
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/fine_tuning.png)
+### Predictions
+<i> Some interesting results </i>
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample1.png)
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample2.png)
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample3.png)
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample4.png)
+![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample5.png)
