@@ -3,7 +3,7 @@
 ## What it's about ?
 Basically, this library can be used to parse PDB files to get structural features.<br>
 But it also allows to prepare such features in order to train a ML model. 
-![alt text](img.png)
+![alt text](Blank Diagram.jpeg)
 ## Organization: 
 
 ### Parser: 
