@@ -32,8 +32,6 @@ class processData(monitor):
             poly = PolynomialFeatures(2)
             augmented = poly.fit_transform(chain)
             augmented = pd.concat([chain,pd.DataFrame(augmented)],axis=1,join='inner')
-            #augmented = pd.DataFrame(augmented, columns = cols+[str(i) for i in range(augmented.shape[1]-len(cols))])
-            #print(chain["isPolar"],augmented["isPolar"])
             self.augmented.append(augmented)
         self.data = self.augmented.copy() 
         del self.augmented
@@ -50,23 +48,6 @@ class processData(monitor):
         self.ws, X_data, y_data = ws,[],[]  
         for chain in self.data:
             data = chain
-#             print(data.columns)
-#             input_features = []
-#             # Recompute correlation
-#             corr = chain.corr()
-#             # Generate a mask for the upper triangle
-#             mask = np.triu(np.ones_like(corr, dtype=np.bool))
-
-#             # Set up the matplotlib figure
-#             f, ax = plt.subplots(figsize=(11, 9))
-
-#             # Generate a custom diverging colormap
-#             cmap = sns.diverging_palette(50, 90, as_cmap=True)
-
-#             # Draw the heatmap with the mask and correct aspect ratio
-#             sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1, center=0,
-#             square=True, linewidths=.5, cbar_kws={"shrink": .5})
-#             plt.show()
             target_features = ["Residue"]
             for idx in range(self.ws,data.shape[0]-self.ws):
                 X_data.append(processData.scale(data.iloc[idx-self.ws:idx,:].values))
