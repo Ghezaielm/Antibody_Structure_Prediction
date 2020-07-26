@@ -23,8 +23,6 @@ class LSTM_AE(monitor):
         self.model.add(Conv1D(filters=128, kernel_size=3, activation='relu'))
         self.model.add(MaxPooling1D(pool_size=1))
         self.model.add(Flatten())
-        #self.model.add(LSTM(l1, activation='relu', input_shape=(self.X.shape[1],self.X.shape[2]), return_sequences=True))
-        #self.model.add(LSTM(l2, activation='relu', return_sequences=False))
         self.model.add(RepeatVector(self.X.shape[1]))
         self.model.add(Dropout(0.4))
         self.model.add(LSTM(l2, activation='relu', return_sequences=True))
@@ -35,14 +33,14 @@ class LSTM_AE(monitor):
         
     @monitor.timer
     def train(self,epochs,bs): 
-        self.filepath1 = os.path.join(os.getcwd(),"Run1.hdf5")
+        self.filepath1 = os.path.join(os.getcwd(),"trained.hdf5")
         checkpoint = ModelCheckpoint(self.filepath1, monitor="val_mse", verbose = 1, save_best_only = True, mode = 'min')
         callbacks_list = [checkpoint]
         self.history = self.model.fit(self.X_train,self.y_train,epochs=epochs,batch_size=bs,verbose=1,validation_data = (self.X_test,self.y_test),callbacks=callbacks_list)
         
     def fineTune(self,epochs,bs,lr=1e-3):
         self.model.load_weights(self.filepath1)
-        self.filepath2 = os.path.join(os.getcwd(),"Run2.hdf5")
+        self.filepath2 = os.path.join(os.getcwd(),"finetuned.hdf5")
         self.model.compile(optimizer=keras.optimizers.Adam(lr), loss='mse',metrics = ['mse'])
         checkpoint = ModelCheckpoint(self.filepath2, monitor="val_mse", verbose = 1, save_best_only = True, mode = 'min')
         callbacks_list = [checkpoint]
