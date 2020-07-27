@@ -38,7 +38,7 @@ With no scalability assessment, we also implemented a finetuning method.
 
 Training on 70/30% allows us to reach something like 15 MSE (Batch size = 200, epochs = 100, CPU). 
 Fine tuning with a lower learning rate allowed us to reach 13 MSE.
-These metrics becomes lower in a 90/10%, probably because of structural redondance (efficient rotamers).
+These metrics become lower in a 90/10% (provided results), probably because of structural redondance (efficient rotamers).
 The model does not appear to overfit (see tutorial) however interstructure variability has to be considered. 
 Using a GPU, one could reach a very low MSE.
 
