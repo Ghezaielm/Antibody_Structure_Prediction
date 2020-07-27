@@ -61,6 +61,5 @@ using the Pymol software.
 <i> Some interesting results </i><br>
 ![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample1.png)
 ![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample2.png)
-![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample3.png)
 ![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample4.png)
 ![alt text](https://github.com/Ghezaielm/Antibody_Structure_Prediction/blob/master/results/sample5.png)
